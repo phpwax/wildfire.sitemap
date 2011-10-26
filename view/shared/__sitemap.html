@@ -1,0 +1,26 @@
+<?
+if(!$filters) $filters = array();
+if(!$scope) $scope = "live";
+if($nodes === false && $model){
+  if($filters) foreach($filters as $filter) if(is_array($filter)) $model->filter($filter['col'], $filter['val'], $filter['operator']);
+  $nodes = $model->roots();
+}
+?>
+<?if($nodes !== false):?><ul class='sitemap'><?endif?>
+  <?foreach($nodes as $branch):?>
+  <li class='branch'>
+    <a href="<?=$branch->permalink?>"><?=$branch->title?></a>
+    <?
+  	$kids = $branch->children;
+  	if($kids){
+  	  $kids = $kids->scope($scope);
+  	  if($filters) foreach($filters as $filter) if(is_array($filter)) $kids->filter($filter['col'], $filter['val'], $filter['operator']);
+  	  $kids = $kids->all();
+  	}
+  	?>
+    <?if($kids && ($kids = $kids->all()) && $kids->count()):?>
+    <?=partial("__sitemap", array('filters'=>$filters, "scope"=>$scope, 'nodes'=>$kids, 'change'=>"monthly"))?>
+    <?endif?>
+  </li>
+  <?endforeach?>
+<?if($nodes !== false):?></ul><?endif?>
