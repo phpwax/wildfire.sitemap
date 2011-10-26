@@ -1,9 +1,12 @@
 <?
 if(!$filters) $filters = array();
 if(!$scope) $scope = "live";
-if($nodes === false && $model) $nodes = $model->roots();
+if($nodes === false && $model){
+  if($filters) foreach($filters as $filter) if(is_array($filter)) $model->filter($filter['col'], $filter['val'], $filter['operator']);
+  $nodes = $model->roots();
+}
 ?>
-  
+
   <?foreach($nodes as $branch):?>
     <url>
   	<loc>http://<?=$_SERVER['HTTP_HOST']?><?=$branch->permalink?></loc>
@@ -13,9 +16,9 @@ if($nodes === false && $model) $nodes = $model->roots();
   	</url>
   	<?
   	$kids = $branch->children;
-  	if($kids){  	  
+  	if($kids){
   	  $kids = $kids->scope($scope);
-  	  if($filters) foreach($filters as $filter) if(is_array($filter)) $kids->filter($filter['col'], $filter['val'], $filter['operator']);  	  
+  	  if($filters) foreach($filters as $filter) if(is_array($filter)) $kids->filter($filter['col'], $filter['val'], $filter['operator']);
   	  $kids = $kids->all();
   	}
   	?>
