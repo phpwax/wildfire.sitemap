@@ -9,7 +9,7 @@ if($nodes === false && $model){
 <?if($nodes !== false):?><ul class='sitemap'><?endif?>
   <?foreach($nodes as $branch):?>
   <li class='branch'>
-    <a href="<?=$branch->permalink?>"><?=$branch->title?></a>
+    <a href="<?=$branch->permalink?>"><?=stripslashes($branch->title)?></a>
     <?
   	$kids = $branch->children;
   	if($kids){
