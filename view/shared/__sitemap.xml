@@ -3,7 +3,7 @@ if(!$filters) $filters = array();
 if(!$scope) $scope = "live";
 if($nodes === false && $model){
   if($filters) foreach($filters as $filter) if(is_array($filter)) $model->filter($filter['col'], $filter['val'], $filter['operator']);
-  $nodes = $model->roots();
+  $nodes = $model->scope($scope)->roots();
 }
 ?>
 
