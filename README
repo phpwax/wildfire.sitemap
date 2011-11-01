@@ -6,7 +6,7 @@ you can now hit $_SERVER['HTTP_HOST']/sitemap.xml and you'll get a sitemap
 
 if you want to make a html version there is a built in helper:
 
-<?=partial("__sitemap", array('filters'=>$filters, "scope"=>$scope, 'nodes'=>false, 'change'=>"monthly"))?>
+<?=partial("__sitemap", array('filters'=>$filters, "scope"=>$cms_live_scope, 'nodes'=>false, 'change'=>"monthly", 'model'=> new $cms_content_class))?>
 
 $filters are applied to the model and children calls and should be in this form:
 
