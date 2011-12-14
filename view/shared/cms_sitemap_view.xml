@@ -7,5 +7,5 @@
 <?endif?>
   
 
-  <?=partial("__sitemap", array('nodes'=>false, 'model'=>new $cms_content_class($cms_live_scope), 'level'=>1, 'change'=>"weekly", 'scope'=>$cms_live_scope, 'filters'=>$sitemap_filters, 'image_sitemap'=>$image_sitemap['status'], 'image_scope'=>$image_sitemap['scope'], 'image_class'=>$image_sitemap['class']), "xml")?>
+  <?=partial("__sitemap", array('nodes'=>false, 'model'=>new $cms_content_class($cms_live_scope), 'level'=>1, 'change'=>"weekly", 'scope'=>$cms_live_scope, 'filters'=>$sitemap_filters, 'image_sitemap'=>$image_sitemap['status'], 'image_scope'=>$image_sitemap['scope'], 'image_class'=>$image_sitemap['class'], 'image_types'=>$image_sitemap['types']), "xml")?>
 </urlset>
