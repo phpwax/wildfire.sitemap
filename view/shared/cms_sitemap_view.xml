@@ -1,9 +1,11 @@
 <?echo'<?xml version="1.0" encoding="UTF-8"?>';?>
 
-<urlset xmlns='http://www.google.com/schemas/sitemap/0.84'
-				  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-				  xsi:schemaLocation='http://www.google.com/schemas/sitemap/0.84
-				                      http://www.google.com/schemas/sitemap/0.84/sitemap.xsd'>
-    
-  <?=partial("__sitemap", array('nodes'=>false, 'model'=>new $cms_content_class($cms_live_scope), 'level'=>1, 'change'=>"weekly", 'scope'=>$cms_live_scope, 'filters'=>$sitemap_filters), "xml")?>
+<?if($image_sitemap['status']):?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<?else:?>
+<urlset xmlns='http://www.google.com/schemas/sitemap/0.84' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.google.com/schemas/sitemap/0.84 http://www.google.com/schemas/sitemap/0.84/sitemap.xsd'>
+<?endif?>
+  
+
+  <?=partial("__sitemap", array('nodes'=>false, 'model'=>new $cms_content_class($cms_live_scope), 'level'=>1, 'change'=>"weekly", 'scope'=>$cms_live_scope, 'filters'=>$sitemap_filters, 'image_sitemap'=>$image_sitemap['status'], 'image_scope'=>$image_sitemap['scope'], 'image_class'=>$image_sitemap['class']), "xml")?>
 </urlset>
