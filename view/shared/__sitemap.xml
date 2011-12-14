@@ -21,7 +21,7 @@ if($nodes === false && $model){
       <?if($img = new $image_class($join->wildfire_file_id)):?>      
       <image:image>
         <image:loc>http<?if($_SERVER['HTTPS']):?>s<?endif?>://<?=$_SERVER['HTTP_HOST']?><?=$img->url()?></image:loc>
-        <?if($join->title):?><image:caption><?=$join->title?></image:caption><?endif?>
+        <?if($join->title):?><image:caption><![CDATA[<?=$join->title?>]]></image:caption><?endif?>
         <image:title><?=basename($img->filename)?></image:title>
       </image:image>
       <?endif?>
