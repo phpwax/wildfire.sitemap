@@ -3,6 +3,7 @@ if(!$filters) $filters = array();
 if(!$scope) $scope = "live";
 if($image_sitemap && !$image_scope) $image_scope = "available";
 if($image_sitemap && !$image_class) $image_class = "WildfireFile";
+if($image_sitemap && !$image_types) $image_types = array("image");
 if($nodes === false && $model){
   if($filters) foreach($filters as $filter) if(is_array($filter)) $model->filter($filter['col'], $filter['val'], $filter['operator']);
   $nodes = $model->scope($scope)->roots();
@@ -15,7 +16,7 @@ if($nodes === false && $model){
   	<lastmod><?=date("Y-m-d", strtotime($branch->date_modified))?></lastmod>
   	<changefreq><?=$change?></changefreq>
   	<priority><?=$level?></priority>
-    <?if($image_sitemap === true && ($joins = $branch->file_meta_get(false, "all")) && $joins->count() ):?>
+    <?if($image_sitemap === true && ($joins = $branch->file_meta_get(false, $image_types)) && $joins->count() ):?>
     <?foreach($joins as $join):?>
       <?if($img = new $image_class($join->wildfire_file_id)):?>      
       <image:image>
@@ -36,6 +37,6 @@ if($nodes === false && $model){
   	}
   	?>
     <?if($kids && ($kids = $kids->all()) && $kids->count()):?>
-      <?=partial("__sitemap", array('filters'=>$filters, "scope"=>$scope, 'nodes'=>$kids, 'level'=>($level-0.2), 'change'=>"monthly"), "xml")?>
+      <?=partial("__sitemap", array('filters'=>$filters, "scope"=>$scope, 'nodes'=>$kids, 'level'=>($level-0.2), 'change'=>"monthly", 'image_sitemap'=>$image_sitemap, 'image_scope'=>$image_scope, 'image_class'=>$image_class, 'image_types'=>$image_types), "xml")?>
     <?endif?>
   <?endforeach?>
