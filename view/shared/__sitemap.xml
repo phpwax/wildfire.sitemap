@@ -22,7 +22,7 @@ if($nodes === false && $model){
       <image:image>
         <image:loc>http<?if($_SERVER['HTTPS']):?>s<?endif?>://<?=$_SERVER['HTTP_HOST']?><?=$img->permalink(false)?></image:loc>
         <?if($join->title):?><image:caption><![CDATA[<?=$join->title?>]]></image:caption><?endif?>
-        <image:title><?=$img->title?></image:title>
+        <image:title><![CDATA[<?=$img->title?>]]></image:title>
       </image:image>
       <?endif?>
     <?endforeach?>
