@@ -12,7 +12,7 @@ if($nodes === false && $model){
 
   <?foreach($nodes as $branch):?>
     <url>
-      <loc>http<?if($_SERVER['HTTPS']):?>s<?endif?>://<?=$_SERVER['HTTP_HOST']?><?=urlencode($branch->permalink)?></loc>
+      <loc>http<?if($_SERVER['HTTPS']):?>s<?endif?>://<?=$_SERVER['HTTP_HOST']?><?=htmlspecialchars($branch->permalink)?></loc>
   	<lastmod><?=date("Y-m-d", strtotime($branch->date_modified))?></lastmod>
   	<changefreq><?=$change?></changefreq>
   	<priority><?=$level?></priority>
@@ -20,7 +20,7 @@ if($nodes === false && $model){
     <?foreach($joins as $join):?>
       <?if($img = new $image_class($join->wildfire_media_id)):?>
       <image:image>
-        <image:loc>http<?if($_SERVER['HTTPS']):?>s<?endif?>://<?=$_SERVER['HTTP_HOST']?><?=urlencode($img->permalink(false))?></image:loc>
+        <image:loc>http<?if($_SERVER['HTTPS']):?>s<?endif?>://<?=$_SERVER['HTTP_HOST']?><?=htmlspecialchars($img->permalink(false))?></image:loc>
         <?if($join->title):?><image:caption><![CDATA[<?=$join->title?>]]></image:caption><?endif?>
         <image:title><![CDATA[<?=$img->title?>]]></image:title>
       </image:image>
