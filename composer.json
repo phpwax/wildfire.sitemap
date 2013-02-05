@@ -14,5 +14,4 @@
     "autoload": {
       "files": ["ini.php"]
     }
-
 }
